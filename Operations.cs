@@ -7,6 +7,7 @@ using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -16,7 +17,16 @@ namespace XamarinHangMan2020
     public class Operations
     {
         //Array of words or Category made of categories
-        string[] animalArr = { "COW", "HORSE", "LION", "CAT", "DOG", "COCO", "GAYCAT" };
+        string[] animalArr = {
+            "COW",
+            "HORSE", 
+            "LION", 
+            "CAT", 
+            "DOG",
+            "EAGLE",
+            "TIGER",
+            "ALLIGATOR",
+            "DUNKER" };
         //the word chosen
         string chosenWord;
         //an array based of chosenWord's number of characters
@@ -27,7 +37,35 @@ namespace XamarinHangMan2020
         string gameWord;
         //variable to show how many tries the player has left
         int tries = 0;
+        //save the name of the user playing
+        string name;
+        //score 
+        int score = 0;
 
+
+        //getter for tries
+        public int getTries() { 
+            return tries;
+        }
+
+        //getter for name
+        public string getName()
+        {
+            return name;
+        }
+
+
+        //restart game
+        public void RestartGame()
+        {
+            chosenWord = null;
+            Array.Clear(chosenWordArray, 0, chosenWordArray.Length);
+            Array.Clear(underscoreArray, 0, underscoreArray.Length);
+            gameWord = null;
+            tries = 0;
+        }
+
+        //checks if there is a name to proceed before playing
         public bool FormCheck(string formValue)
         {
             if(formValue == "")
@@ -35,6 +73,7 @@ namespace XamarinHangMan2020
                 return false;
             }else {
 
+                name = formValue;
                 return true;            
             }
         
@@ -71,13 +110,17 @@ namespace XamarinHangMan2020
         //Gameplay method
         public string GamePlay(string letter)
         {
-            //the chosen letter exists inside the chosen word array
-            if(chosenWord.Contains(letter))
+           //the chosen letter exists inside the chosen word array
+            if (!chosenWord.Contains(letter))
+            {
+                tries  += 1;
+
+            }else
             {
                 //add the letter inside the underscore array
-                for(int i = 0; i < chosenWordArray.Length; i++)
+                for (int i = 0; i < chosenWordArray.Length; i++)
                 {
-                    if(letter == chosenWordArray[i].ToString())
+                    if (letter == chosenWordArray[i].ToString())
                     {
                         underscoreArray[i] = Convert.ToChar(letter);
                     }
@@ -86,15 +129,32 @@ namespace XamarinHangMan2020
                 gameWord = null;
                 foreach (var item in underscoreArray)
                 {
-
                     gameWord += item.ToString() + " ";
                 }
+                if(isWin(gameWord))
+                {
+                    score += 1;
+                    return gameWord = "win";
+                }
+            }
+                return gameWord;
+        }
+
+        //function to check if the word is already solved or not
+        public bool isWin(string word)
+        {
+           if(word.Contains("_"))
+            {
+                return false;
             }else
             {
-                tries += 1;
+                return true;
             }
+        }
 
-            return gameWord;
+        public string winMessage()
+        {
+            return "Congrats, " + name + ". Your score is " + score + ".";
         }
     }
 }

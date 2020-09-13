@@ -42,9 +42,9 @@
         android:textStyle="bold" />
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="213.0dp"
         android:id="@+id/imgHangMan"
-        android:paddingTop="150px"
+        android:paddingTop="5px"
         android:src="@drawable/first"
         android:cropToPadding="false"
         android:maxWidth="200px"/>
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/row1"
-        android:paddingTop="200px">
+        android:paddingTop="50px">
         <Button
             android:text="Q"
             android:id="@+id/btnQ"

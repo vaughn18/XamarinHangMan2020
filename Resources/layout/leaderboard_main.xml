@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tbLeaderboard"
+            android:background="#ffe65100"
+            >
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/textView1"
+                android:textColor="#ffffffff"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:textAlignment="center"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="50px">
+
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/tvName"
+            android:textStyle="bold"
+            android:textSize="24dip"
+            android:textColor="#ffb71c1c" />
+
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/tvScore"
+            android:textColor="#ff1b5e20"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:paddingLeft="90px" />
+    </LinearLayout>
+
+
+</LinearLayout>
