@@ -10,6 +10,7 @@ using Org.Apache.Http.Conn;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using XamarinHangMan2020.Business;
 using static Android.App.ActionBar;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 
@@ -21,9 +22,8 @@ namespace XamarinHangMan2020
         Operations operation = new Operations();
 
         //db variables
-        Database db;
-        List<Leaderboard> listSource = new List<Leaderboard>();
         ListView listViewData;
+        List<TableLeaderboard> leaderboardData;
 
 
         //fundamental variables
@@ -249,22 +249,20 @@ namespace XamarinHangMan2020
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.tbLeaderboard);
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = "Leaderboards";
-
-            //load database
-            db = new Database();
-            db.CreateDatabase();
-            tvScore = FindViewById<TextView>(Resource.Id.tvScore);
-            tvName = FindViewById<TextView>(Resource.Id.tvName);
-
+            LeaderBoardInit();
         }
 
-        //load leaderboard data
-        private void LoadData()
+        //leaderboard screen initialisation
+        private void LeaderBoardInit()
         {
-            listSource = db.selectTable();
-            var adapter = new ListView()
+            listViewData = FindViewById<ListView>(Resource.Id.listViewLeaderboard);
+            leaderboardData = Database.LoadLeaderboard();
+
+            var dataAdapter = new LeaderboardDataAdapter(this, leaderboardData);
+            listViewData.Adapter = dataAdapter;
 
         }
+
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

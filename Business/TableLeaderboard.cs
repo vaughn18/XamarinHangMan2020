@@ -14,11 +14,14 @@ using Android.Widget;
 
 namespace XamarinHangMan2020
 {
-    class Leaderboard
+    [Table("TableLeaderboard")]
+    public class TableLeaderboard
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, Column("Id")]
         public int Id { get; set; }
+        [Column("Name")]
         public string Name { get; set; }
+        [Column("Score")]
         public int Score { get; set; }
     }
 }
