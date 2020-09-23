@@ -53,6 +53,17 @@ namespace XamarinHangMan2020
         {
             return name;
         }
+        //getter for score
+        public int getScore()
+        {
+            return score;
+        }
+
+        //restarts the score
+        public void restartScore()
+        {
+            score = 0;
+        }
 
 
         //restart game

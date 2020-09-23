@@ -46,12 +46,14 @@ namespace XamarinHangMan2020.Business
         {
             var item = items[position];
             var view = convertView;
-            if(view == null)
+
+            if (view == null)
             {
                 view = context.LayoutInflater.Inflate(Resource.Layout.leaderboardData, null);
                 view.FindViewById<TextView>(Resource.Id.tvName).Text = $@"{item.Name}";
-                view.FindViewById<TextView>(Resource.Id.tvScore).Text = $@"{item.Score.ToString()}";
+                view.FindViewById<TextView>(Resource.Id.tvScore).Text = $@"{item.Score}";
             }
+
             return view;
         }
 

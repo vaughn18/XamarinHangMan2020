@@ -29,6 +29,7 @@ namespace XamarinHangMan2020
         //fundamental variables
         private Button btnPlay;
         private Button btnLeaderboard;
+        private Button btnResetLeaderboards;
         private TextView errorMsg;
         private EditText form;
         private TextView tvWord;
@@ -168,12 +169,11 @@ namespace XamarinHangMan2020
                 alertDialog.SetMessage(operation.winMessage());
                 alertDialog.SetNeutralButton("Next Word", delegate
                 {
+                    //when game wins
                     //next round
                     alertDialog.Dispose();
                     operation.RestartGame();
                     initGameScreen();
-
-
                 });
                 alertDialog.Show();
             }
@@ -218,8 +218,11 @@ namespace XamarinHangMan2020
                     alertDialog.SetMessage("You have lost the game");
                     alertDialog.SetNeutralButton("Restart", delegate
                     {
+                        //what to do when lost
                         alertDialog.Dispose();
+                        Database.AddPlayerScore(operation.getName(), operation.getScore());
                         operation.RestartGame();
+                        operation.restartScore();
                         RestartGame();
 
                     });
@@ -231,6 +234,8 @@ namespace XamarinHangMan2020
         //initialize buttons
         private void MenuInit()
         {
+            //initialise reset leaderbaords
+            btnResetLeaderboards = FindViewById<Button>(Resource.Id.btnResetLeaderboard);
             //initialise play button
             btnPlay = FindViewById<Button>(Resource.Id.btnPlay);
             //initialise error message 
@@ -240,6 +245,14 @@ namespace XamarinHangMan2020
             //initialise leader board button
             btnLeaderboard = FindViewById<Button>(Resource.Id.btnLeaderboard);
             btnLeaderboard.Click += Leaderboard_Click;
+            btnResetLeaderboards.Click += resetLeaderboards_Click;
+        }
+
+
+        //resets leaderboards
+        private void resetLeaderboards_Click(object sender, EventArgs e)
+        {
+            Database.ResetLeaderboard();
         }
 
         //load leaderboard

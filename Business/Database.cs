@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.Util;
 using System.IO;
+using Android.Database.Sqlite;
 
 namespace XamarinHangMan2020
 {
@@ -20,6 +21,7 @@ namespace XamarinHangMan2020
         public static SQLiteConnection Con;
         public static string dbFilePath;
         public static string dbName;
+
 
         //init db
         static Database()
@@ -48,7 +50,24 @@ namespace XamarinHangMan2020
                 }
             }
 
-            return Con.Table<TableLeaderboard>().ToList();
+            List<TableLeaderboard> list = Con.Table<TableLeaderboard>().ToList();
+
+            List<TableLeaderboard> sortedList = list.OrderByDescending<TableLeaderboard, int>(item => item.Score).ToList();
+
+
+            return sortedList;
+        }
+
+        public static void ResetLeaderboard()
+        {
+            try
+            {
+                Con.DeleteAll<TableLeaderboard>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Delete Error:" + ex.Message);
+            }
         }
 
         public static void AddPlayerScore(string name, int score)

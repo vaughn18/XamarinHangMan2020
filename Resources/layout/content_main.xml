@@ -50,4 +50,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnLeaderboard"/>
 
+        <Button
+        android:text="Remove your score records"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnResetLeaderboard" />
+
 </LinearLayout>
